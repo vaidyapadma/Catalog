@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request, redirect,jsonify, url_for, flash
+from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
 app = Flask(__name__)
 
-from sqlalchemy import create_engine, asc,desc,func
-from sqlalchemy.orm import sessionmaker,joinedload
-from catalog_setup import Base, Category,Item ,User
+from sqlalchemy import create_engine, asc, desc, func
+from sqlalchemy.orm import sessionmaker, joinedload
+from catalog_setup import Base, Category, Item, User
 from pprint import pprint
-
-#New imports for login session
+ 
+ 
+# New imports for login session
 from flask import session as login_session
 import random, string
 # IMPORTS FOR THIS STEP
@@ -25,14 +26,15 @@ APPLICATION_NAME = "Restaurant Menu Application"
 
 
 
-#Connect to Database and create database session
+# Connect to Database and create database session
 engine = create_engine('sqlite:///category.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-#create login session
+# create login session
+
 
 @app.route('/login')
 def showLogin():
@@ -197,6 +199,20 @@ def getCatalog():
 @app.route('/catalog/JSON')
 def catalogtMenuJSON():
     return jsonify(getCatalog())
+
+
+@app.route('/catalog/<int:catagory_id>/menu/JSON')
+def catalogcatid(catagory_id):
+    catagory = session.query(Category).filter_by(id=catagory_id).one()
+    items = session.query(Item).filter_by(category_name = catagory.name).all()
+    return jsonify(Item=[i.serialize for i in items])   
+
+
+@app.route('/catalog/<int:catagory_id>/menu/<int:item_id>/JSON')
+def catalogitemid(catagory_id,item_id):
+    catagory = session.query(Category).filter_by(id = catagory_id).one()
+    items = session.query(Item).filter_by(id = item_id).one()
+    return jsonify(Item = items.serialize) 
 
 
 #Show all Catagories
