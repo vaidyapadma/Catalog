@@ -1,4 +1,3 @@
-catalog project .
 Install Vagrant and VirtualBox
 Launch Vagrant VM(i.e vagrant up)
 First write datastructure for Category table and Item Table as in catalog_setup.py
