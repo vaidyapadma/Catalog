@@ -58,14 +58,14 @@ session.add(Item1)
 session.commit()
 
 Item2 = Item(user_id=1, name="Backboards",
-            description="It is a raised vertical board with an attached basket consisting of a net suspended from a hoop. ", 
+            description="It is a raised vertical board with an attached basket . ", 
             category=category2)
 
 session.add(Item2)
 session.commit()
 
 Item3 = Item(user_id=1, name="sleeve", 
-            description="A basketball sleeve, like the wristband, is an accessory that some basketball players wear.",
+            description="A basketball sleeve, like the wristband.",
             category=category2)
 
 session.add(Item3)
@@ -82,7 +82,7 @@ Item1 = Item(user_id=1, name="Shin Pads",
 session.add(Item1)
 session.commit()
 Item2 = Item(user_id=1, name="Hockey Stick",
-            description=" In field hockey, each player carries a stick and cannot take part in the game without it. ",
+            description=" In field hockey, each player carries a stick . ",
             category=category3)
 
 session.add(Item2)
